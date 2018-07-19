@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <title>Babylon - X5 Fix</title>  
+    <style>
+        html, body {
+            overflow: hidden;
+            width   : 100%;
+            height  : 100%;
+            margin  : 0;
+            padding : 0;
+        }
+
+        #renderCanvas {
+            width   : 100%;
+            height  : 100%;
+            touch-action: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script src="js/pep.js"></script>
+    <script src="js/babylon.wxfix.js"></script>
+    <script src="js/babylon.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+            // get the canvas DOM element
+            var canvas = document.getElementById('renderCanvas');
+
+            // load the 3D engine
+            var engine = new BABYLON.Engine(canvas, true);
+
+            // createScene function that creates and return the scene
+            var createScene = function(){
+                // create a basic BJS Scene object
+                var scene = new BABYLON.Scene(engine);
+
+                scene.createDefaultCameraOrLight(true); 
+                // attach the camera to the canvas
+                scene.activeCamera.attachControl(canvas, false); 
+                scene.activeCamera.radius = 50;
+                scene.activeCamera.beta = Math.PI/3;
+                
+                //**************************************************
+                BabylonFix(scene,canvas); 
+                //**************************************************  
+
+                // create a built-in "sphere" shape; its constructor takes 6 params: name, segment, diameter, scene, updatable, sideOrientation 
+                var sphere = BABYLON.Mesh.CreateSphere('sphere1', 16, 2, scene);
+
+                // move the sphere upward 1/2 of its height
+                sphere.position.y = 1;
+
+                // create a built-in "ground" shape;
+                var ground = BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene);
+
+                // return the created scene
+                return scene;
+            }
+
+            // call the createScene function
+            var scene = createScene();
+
+            // run the render loop
+            engine.runRenderLoop(function(){
+                scene.render();
+            });
+
+            // the canvas/window resize event handler
+            window.addEventListener('resize', function(){
+                engine.resize();
+            });
+        });
+    </script>
+</body>
+</html>
