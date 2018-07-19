@@ -28,12 +28,12 @@ function BabylonFix(scene,element){
 
   mc.on("pinchin",function (evt) {
     console.log("pinchin")
-    scene.activeCamera.inertialRadiusOffset -= 0.02;
+    scene.activeCamera.inertialRadiusOffset -= 0.03;
   });
 
   mc.on("pinchout",function (evt) {
     console.log("pinchout")
-    scene.activeCamera.inertialRadiusOffset += 0.02;
+    scene.activeCamera.inertialRadiusOffset += 0.03;
   });
 
   mc.on("panmove",function (evt) { 

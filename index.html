@@ -20,8 +20,7 @@
     </style>
 </head>
 <body>
-    <canvas id="renderCanvas"></canvas>
-    <script src="js/pep.js"></script>
+    <canvas id="renderCanvas"></canvas> 
     <script src="js/babylon.wxfix.js"></script>
     <script src="js/babylon.js"></script>
     <script>
@@ -38,11 +37,9 @@
                 var scene = new BABYLON.Scene(engine);
 
                 scene.createDefaultCameraOrLight(true); 
-                // attach the camera to the canvas
-                scene.activeCamera.attachControl(canvas, false); 
-                scene.activeCamera.radius = 50;
-                scene.activeCamera.beta = Math.PI/3;
-                
+                scene.activeCamera.radius = 20;
+                scene.activeCamera.beta = Math.PI/3; 
+                scene.activeCamera.setTarget(BABYLON.Vector3.Zero());
                 //**************************************************
                 BabylonFix(scene,canvas); 
                 //**************************************************  
