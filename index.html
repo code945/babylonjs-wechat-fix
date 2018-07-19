@@ -40,6 +40,7 @@
                 scene.activeCamera.radius = 20;
                 scene.activeCamera.beta = Math.PI/3; 
                 scene.activeCamera.setTarget(BABYLON.Vector3.Zero());
+                scene.activeCamera.attachControl(canvas, false);
                 //**************************************************
                 BabylonFix(scene,canvas); 
                 //**************************************************  
